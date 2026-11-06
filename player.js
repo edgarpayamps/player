@@ -46,7 +46,7 @@
     dyn: { title: 'Dynamic Groups', ph: 'Search dynamic groups', all: 'All dynamic groups', opts: ['New Hires', 'Training Due This Month', 'Expiring Qualifications', 'Overdue Training'] },
   };
   const ADMIN = [
-    ['Records and Media Management', [['cloud_download', 'Download', 'admin-download'], ['cloud_upload', 'Upload Records', 'open-upload'], ['perm_media', 'Client Media', 'open-courses'], ['bar_chart', 'Roster'], ['cloud_sync', 'Alchemy Manager Settings']]],
+    ['Records and Media Management', [['cloud_download', 'Download', 'admin-download'], ['cloud_upload', 'Upload Records', 'open-upload'], ['perm_media', 'Client Media'], ['bar_chart', 'Roster'], ['cloud_sync', 'Alchemy Manager Settings']]],
     ['Presentation Settings', [['co_present', 'Presentation Options'], ['groups', 'Audience Responses'], ['display_settings', 'Display Settings'], ['podium', 'Facilitator Settings'], ['tv_signin', 'Kiosk Settings']]],
     ['Hardware Devices', [['settings_remote', 'Input Devices'], ['badge', 'Badge Registration', 'open-register'], ['settings', 'Alchemy Settings']]],
     ['General Settings', [['person_add', 'Add User'], ['group', 'Manage Groups'], ['shield', 'Password Security']]],
@@ -125,6 +125,7 @@
     cloud_upload: ['0 0 40 40', 'M32.25 16.7334C31.1167 10.9834 26.0667 6.66675 20 6.66675C15.1833 6.66675 11 9.40008 8.91667 13.4001C3.9 13.9334 0 18.1834 0 23.3334C0 28.8501 4.48333 33.3334 10 33.3334H31.6667C36.2667 33.3334 40 29.6001 40 25.0001C40 20.6001 36.5833 17.0334 32.25 16.7334ZM23.3333 21.6667V28.3334H16.6667V21.6667H11.6667L20 13.3334L28.3333 21.6667H23.3333Z'],
   };
   const cloudSvg = name => `<svg class="cloud-svg" viewBox="${CLOUDS[name][0]}" width="1em" height="1em" fill="currentColor" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="${CLOUDS[name][1]}"/></svg>`;
+  const menuDl = document.getElementById('menuDlIcon'); if (menuDl) menuDl.innerHTML = cloudSvg('cloud_download');
   const icon = (name, cls = '') => CLOUDS[name] ? `<span class="ms ico-svg ${cls}" aria-hidden="true">${cloudSvg(name)}</span>` : `<span class="ms ${cls}" aria-hidden="true">${name}</span>`;
   const act = id => ACTIVITIES.find(a => a.id === id);
   const emp = id => EMPLOYEES.find(e => e.id === id);
@@ -149,7 +150,7 @@
 
   // ---------- In-app notifications (bell flyout) ----------
   // From the "In-App Notifications" Figma file: flyout with All / Unread tabs, priority bar + icon on unread rows,
-  // Player-only content: uploads/downloads, input devices, Client Media and Player updates (no Manager admin items).
+  // Player-only content: uploads/downloads, input devices, course downloads and Player updates (no Manager admin items).
   // envelope = mark as read, read rows show Dismiss on hover. Order: newest day first, then High → Low, then newest time.
   const PRI = { high: 0, medium: 1, low: 2 };
   const NOTIFS = [
@@ -159,7 +160,7 @@
     { id: 'n4', pri: 'low', icon: 'cloud_upload', title: 'Results waiting to upload', body: 'Morning Shift Safety results upload automatically when Alchemy Manager is connected.', day: 0, at: 390, time: 'Today, 6:30 AM', act: 'View recent sessions', run: 'go:sessions', unread: true },
     { id: 'n5', pri: 'low', icon: 'task_alt', title: 'Results uploaded', body: 'Evening Shift Safety results for 12 employees uploaded to Alchemy Manager.', day: 1, at: 1068, time: 'Yesterday, 5:48 PM', act: 'View recent sessions', run: 'go:sessions', unread: false },
     { id: 'n7', pri: 'low', icon: 'system_update', title: 'Player update available', body: 'Alchemy Player 8.4.0 is ready. It installs the next time you close the Player.', day: 1, at: 1020, time: 'Yesterday, 5:00 PM', act: 'See what’s new', run: 'toast:Release notes open in the Help Center in the real Player.', unread: false },
-    { id: 'n6', pri: 'low', icon: 'perm_media', title: 'New course in Client Media', body: 'Hazard Communication (GHS) is ready to download.', day: 1, at: 850, time: 'Yesterday, 2:10 PM', act: 'Open Client Media', run: 'open-courses', unread: false },
+    { id: 'n6', pri: 'low', icon: 'cloud_download', title: 'New course available', body: 'Hazard Communication (GHS) is ready to download.', day: 1, at: 850, time: 'Yesterday, 2:10 PM', act: 'Download course', run: 'open-courses', unread: false },
   ];
   const notif = { open: false, tab: 'all', list: NOTIFS.map(n => ({ ...n })) };
   const unreadCount = () => notif.list.filter(n => n.unread).length;
@@ -862,7 +863,7 @@
       <div class="mb">${ADMIN.map(([h, tiles]) => `<div class="sec"><h3>${h}</h3><div class="tiles">${tiles.map(([ic, l, a]) => `<button class="tile" type="button" ${a ? `data-action="${a}"` : `data-action="toast" data-msg="${l} isn't part of this prototype yet."`}>${icon(ic, 'fill')}<span>${l}</span></button>`).join('')}</div></div>`).join('')}</div></div>`;
   }
 
-  // Download courses (More → Client Media, or Admin → Client Media)
+  // Download courses (More → Download course)
   function filteredCourses(m) {
     const q = m.q.trim().toLowerCase();
     return state.courses.filter(c => (!q || c.t.toLowerCase().includes(q)) && (m.lang === 'all' || c.lang === m.lang) && (m.cat === 'all' || c.cat === m.cat));
@@ -1145,7 +1146,7 @@
         const x = notif.list.find(y => y.id === id); x.unread = false; setNotifs(false);
         if (x.run.startsWith('go:')) go(x.run.slice(3));
         else if (x.run.startsWith('toast:')) toast(x.run.slice(6));
-        else if (x.run === 'open-courses') $('#moreMenu [data-action="open-courses"]').click();
+        else if (x.run === 'open-courses') openModal({ type: 'courses', q: '', lang: 'all', cat: 'all', checked: 'Today, 9:41 AM' }), runCourses();
         else $(`.topnav [data-action="${x.run}"]`).click();
         break;
       }
