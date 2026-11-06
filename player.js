@@ -782,20 +782,26 @@
         <div class="split-line ov-line"><span>Overall progress</span><span class="num-col">${overall}%</span></div>
         <div class="bar2"><div style="width:${overall}%"></div></div>
         <div>${doneCount} of ${m.items.length} items complete</div>
-        <div class="muted" style="font-size:var(--fs-sm)">${done ? 'You can close this window.' : m.bg ? 'Automatic download is running in the background. Hide this window to keep working.' : 'Please keep Player open until the download finishes.'}</div></div>
-      <div class="mf">${done ? '<button class="btn dark" type="button" data-action="close-modal" autofocus>Close</button>' : `${m.bg ? '<button class="btn" type="button" data-action="close-modal">Hide</button>' : ''}<button class="btn" type="button" data-action="ask-cancel-download">Cancel download</button>`}</div></div>`;
+        <div class="muted" style="font-size:var(--fs-sm)">${done ? 'You can close this window.' : m.bg ? 'Automatic download is running in the background. Close this window to keep working.' : 'Please keep Player open until the download finishes.'}</div></div>
+      <div class="mf">${done ? '<button class="btn dark" type="button" data-action="close-modal" autofocus>Close</button>' : '<button class="btn" type="button" data-action="ask-cancel-download">Cancel download</button><button class="btn dark" type="button" data-action="close-modal" autofocus>Close</button>'}</div></div>`;
   }
+  // A manual download keeps running after its window is closed (Close is the primary action); the top-bar
+  // Download button reopens the same job while it runs. It pauses only while "Cancel download?" is asking.
+  let dlJob = null, dlTimer = null;
   function startDownload(keys) {
     const items = DL_ITEMS.filter(([k]) => keys.includes(k)).map(([k, t]) => ({ k, t, p: 0 }));
-    openModal({ type: 'download', items });
-    const m = state.modal;
-    mEvery(() => {
-      if (state.modal !== m) return; // paused while the cancel confirmation is open
+    const m = dlJob = { type: 'download', items };
+    openModal(m);
+    clearInterval(dlTimer);
+    dlTimer = setInterval(() => {
+      if (state.modal && state.modal.type === 'cancelDl' && state.modal.prev === m) return;
       const x = m.items.find(v => v.p < 100);
-      if (!x) return;
-      x.p = Math.min(100, x.p + (x.k === 'media' ? 4 : 8));
-      if (m.items.every(v => v.p >= 100)) { state.sync.dl = 100; state.sync.lastDl = `Today, ${nowTime()}`; render(); }
-      renderModal();
+      if (x) x.p = Math.min(100, x.p + (x.k === 'media' ? 4 : 8));
+      if (m.items.every(v => v.p >= 100)) {
+        clearInterval(dlTimer); dlJob = null; state.sync.dl = 100; state.sync.lastDl = `Today, ${nowTime()}`; render();
+        if (state.modal !== m) toast('Download complete. This Player has the latest data and media.');
+      }
+      if (state.modal === m) renderModal();
     }, 240);
   }
   function modalCancelDl() {
@@ -1208,9 +1214,10 @@
         openModal({ type: 'register', step: 2, badge: emp(nx).eid, emp: nx });
         waitForRemote(state.modal, emp(nx)); break;
       }
-      case 'open-download': if (dlBusy()) { openModal({ type: 'download', bg: true, items: bgItems() }); break; } openModal({ type: 'dlSettings', admin: false, pick: { user: true, course: true, media: true } }); break;
+      case 'open-download': if (dlJob) { openModal(dlJob); break; } if (dlBusy()) { openModal({ type: 'download', bg: true, items: bgItems() }); break; } openModal({ type: 'dlSettings', admin: false, pick: { user: true, course: true, media: true } }); break;
       case 'cancel-download': {
         const bg = state.modal && state.modal.prev && state.modal.prev.bg;
+        if (state.modal && state.modal.prev === dlJob) { clearInterval(dlTimer); dlJob = null; }
         closeModal();
         if (bg) { Object.keys(state.sync.auto).forEach(k => { state.sync.auto[k] = false; }); render(); toast('Download cancelled and automatic download turned off. Finished items stay available.'); }
         else toast('Download cancelled. Items that finished downloading stay available.');
