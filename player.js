@@ -367,7 +367,7 @@
     const sel = selActs();
     return `<section class="screen">
       <div class="head"><div><h1>Select activities</h1><p>Choose activities, playlists, or learning plans for your session.</p></div>${stepper(1)}</div>
-      <div class="split">
+      <div class="split sel">
         <div class="card library">
           <div class="tabs" role="tablist">${tabs.map(([k, ic, l]) => `<button class="tab" role="tab" type="button" aria-selected="${state.tab === k}" data-action="tab" data-tab="${k}">${icon(ic, state.tab === k ? 'fill' : '')}${l}</button>`).join('')}</div>
           ${body}
