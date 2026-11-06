@@ -1119,3 +1119,8 @@ button.step:hover span:last-child { text-decoration: underline; }
   .ctbl .cname .ms { display: none; }
   .ctbl .cprog { min-width: 64px; }
 }
+
+/* Start page hero (side-by-side): never wider than the photo's own shape at this height, so the top isn't trimmed on wide screens */
+@media (min-width: 1101px) {
+  .home { grid-template-columns: minmax(0, min(58%, calc((100dvh - 108px) * 1.019))) minmax(0, 1fr); }
+}
