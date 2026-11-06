@@ -1192,7 +1192,12 @@
     if (r !== route()) { history.replaceState(null, '', '#' + r); }
     const ws = $('#workspace');
     const keep = r === lastRoute ? { top: window.scrollY, id: document.activeElement && document.activeElement.id, sel: document.activeElement && document.activeElement.selectionStart } : null;
+    // Keep inner scroll positions (activity and employee lists, roster, queue) and the focused row control across re-renders.
+    const scrolls = keep ? [...ws.querySelectorAll('*')].filter(el => el.scrollTop || el.scrollLeft).map(el => ({ k: el.className, i: [...ws.getElementsByClassName(el.className.split(' ')[0])].indexOf(el), t: el.scrollTop, l: el.scrollLeft })) : [];
+    const ae = document.activeElement; const fkey = keep && ae && !ae.id && ae.dataset && ae.dataset.action && ws.contains(ae) ? `[data-action="${ae.dataset.action}"]${ae.dataset.id ? `[data-id="${ae.dataset.id}"]` : ''}` : null;
     ws.innerHTML = ROUTES[r]();
+    scrolls.forEach(x => { const el = ws.getElementsByClassName(x.k.split(' ')[0])[x.i]; if (el && el.className === x.k) { el.scrollTop = x.t; el.scrollLeft = x.l; } });
+    if (fkey) { const el = ws.querySelector(fkey); if (el) el.focus({ preventScroll: true }); }
     document.querySelectorAll('.check[data-ind]').forEach(c => { c.indeterminate = true; });
     const all = $('#actAll'); if (all) { const l = filteredActivities(); const n = l.filter(a => state.selActs.includes(a.id)).length; all.indeterminate = n > 0 && n < l.length; }
     const ea = $('#empAll'); if (ea) { const l = filteredEmployees(); const n = l.filter(e => state.selEmps.includes(e.id)).length; ea.indeterminate = n > 0 && n < l.length; }
