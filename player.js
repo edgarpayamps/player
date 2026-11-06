@@ -232,7 +232,11 @@
         ${row('cloud_upload', 'Uploads', q ? `${plural(q, 'session')} queued` : 'Nothing to upload', q ? 'Uploads automatically when connection returns.' : 'All sessions are uploaded.')}</div>`;
     }
     const dlBusy = autoOn() && s.dl < 100;
-    const dl = !autoOn()
+    const man = manualDlPct(); // a manual download (Admin settings → Download) shows here while it runs
+    const dl = man !== null
+      ? row('cloud_download', 'Downloads', `In progress - ${man}%`, `Last downloaded: ${s.lastDl}`, '<span class="spin sm" aria-hidden="true"></span>',
+        `<button class="iconbtn" type="button" aria-label="Show download progress" data-action="open-download">${icon('chevron_right')}</button>`)
+      : !autoOn()
       ? row('cloud_download', 'Downloads', 'Automatic download off', `Last downloaded: ${s.lastDl}`, '', `<button class="btn dark xs" type="button" data-action="download-now">Download now</button>`)
       : row('cloud_download', 'Downloads', dlBusy ? `In progress - ${s.dl}%` : 'Up to date', `Last downloaded: ${s.lastDl}`, dlBusy ? '<span class="spin sm" aria-hidden="true"></span>' : '',
         `<button class="iconbtn" type="button" aria-label="Download settings" data-action="open-download">${icon('chevron_right')}</button>`);
@@ -788,6 +792,7 @@
   // A manual download keeps running after its window is closed (Close is the primary action); the top-bar
   // Download button reopens the same job while it runs. It pauses only while "Cancel download?" is asking.
   let dlJob = null, dlTimer = null;
+  function manualDlPct() { return dlJob ? Math.round(dlJob.items.reduce((t, x) => t + x.p, 0) / dlJob.items.length) : null; }
   function startDownload(keys) {
     const items = DL_ITEMS.filter(([k]) => keys.includes(k)).map(([k, t]) => ({ k, t, p: 0 }));
     const m = dlJob = { type: 'download', items };
@@ -802,6 +807,7 @@
         if (state.modal !== m) toast('Download complete. This Player has the latest data and media.');
       }
       if (state.modal === m) renderModal();
+      if (route() === 'home' && !state.modal) render(); else syncNav(); // start-page status box + animated nav cloud
     }, 240);
   }
   function modalCancelDl() {
@@ -1043,7 +1049,7 @@
   // Nav icons pulse while a background sync runs; status bar reflects connection state.
   function syncNav() {
     const s = state.sync, r = lastRoute;
-    const dlBusy = state.online && autoOn() && s.dl < 100, ulBusy = state.online && s.ul < 100 && queuedUploads() > 0;
+    const dlBusy = (state.online && autoOn() && s.dl < 100) || !!dlJob, ulBusy = state.online && s.ul < 100 && queuedUploads() > 0;
     const di = $('#navDlIcon'), ui = $('#navUlIcon');
     di.textContent = dlBusy ? 'cloud_sync' : 'cloud_download'; di.classList.toggle('pulse', dlBusy);
     ui.textContent = ulBusy ? 'cloud_sync' : 'cloud_upload'; ui.classList.toggle('pulse', ulBusy);
