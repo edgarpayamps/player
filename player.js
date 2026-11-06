@@ -532,7 +532,8 @@
         <aside class="card rpanel">
           <div class="top"><div><h2>Session roster</h2><div class="sub">${plural(nSel, 'employee')}</div></div>
             <button class="btn sm" type="button" data-action="open-register">${icon('badge', 'fill')}Register employee</button></div>
-          <ul class="names">${roster.map(e => `<li>${esc(e.name)}${state.remotes[e.id] ? `<span class="r">Remote ${state.remotes[e.id]}</span>` : ''}<button type="button" class="iconbtn" aria-label="Remove ${esc(e.name)}" data-action="toggle-emp" data-id="${e.id}">${icon('close')}</button></li>`).join('') || '<li class="empty" style="border:0;font-weight:400">No employees yet. Select employees from the list.</li>'}</ul>
+          <ul class="names">${roster.map(e => `<li>${esc(e.name)}${state.remotes[e.id] ? `<span class="r">Remote ${state.remotes[e.id]}</span>` : ''}<button type="button" class="iconbtn" aria-label="Remove ${esc(e.name)}" data-action="toggle-emp" data-id="${e.id}">${icon('close')}</button></li>`).join('') || `<li class="empty" style="border:0;font-weight:400">No employees yet. Select employees from the list.${state.lastRoster ? `<div style="margin-top:14px"><button class="link sm" type="button" data-action="restore-roster">${icon('restore')}Restore roster</button></div>` : ''}</li>`}</ul>
+          ${nSel ? `<div class="clr"><button class="link sm" type="button" data-action="clear-roster">${icon('close')}Clear roster</button></div>` : ''}
           <div class="facil"><h3>Facilitator</h3><div class="who">${icon('person')}Edgar Payamps<button class="link" type="button" data-action="toast" data-msg="Only one facilitator is signed in to this Player.">${icon('sync')}Change</button></div>
             <div class="summary">${plural(nSel, 'employee')} &nbsp;•&nbsp; 1 facilitator</div></div>
         </aside>
@@ -1277,6 +1278,8 @@
       }
       case 'toggle-customize': state.customize = !state.customize; render(); break;
       case 'confirm-end': openModal({ type: 'endSes' }); break;
+      case 'clear-roster': state.lastRoster = { sel: state.selEmps.slice(), remotes: { ...state.remotes } }; state.selEmps = []; state.remotes = {}; render(); break;
+      case 'restore-roster': if (state.lastRoster) { state.selEmps = state.lastRoster.sel; state.remotes = state.lastRoster.remotes; state.lastRoster = null; } render(); break;
       case 'restore-sel': state.selActs = state.lastSel || []; state.lastSel = null; render(); break;
       case 'open-details': openModal({ type: 'details', id }); break;
       case 'detail-toggle': setActs(state.selActs.includes(id) ? state.selActs.filter(x => x !== id) : [...state.selActs, id]); closeModal(); render(); toast(state.selActs.includes(id) ? `Added “${act(id).title}” to the session.` : `Removed “${act(id).title}” from the session.`); break;
