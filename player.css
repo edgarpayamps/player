@@ -1094,3 +1094,28 @@ button.step:hover span:last-child { text-decoration: underline; }
 /* Brand cloud SVGs inside icon slots: same box as the glyph they replace */
 .ms.ico-svg { display: inline-flex; align-items: center; justify-content: center; width: 1em; height: 1em; line-height: 1; }
 .ms.ico-svg .cloud-svg { display: block; width: 1em; height: 1em; }
+
+/* Download courses: all columns visible at any width; course titles and categories wrap */
+.ctbl { overflow-x: auto; }
+.ctbl .tbl { min-width: 0; table-layout: auto; }
+.ctbl th, .ctbl td { white-space: nowrap; }
+.ctbl td:nth-child(1), .ctbl td:nth-child(3), .ctbl th:nth-child(1), .ctbl th:nth-child(3) { white-space: normal; overflow-wrap: break-word; }
+.ctbl td:nth-child(1) { min-width: 140px; }
+.ctbl td:nth-child(3) { min-width: 80px; }
+.ctbl .cname { display: flex; align-items: flex-start; }
+.ctbl .cname .ms { flex: none; margin-top: 1px; }
+.ctbl td.act { width: 1%; }
+.ctbl .ctag { min-width: 0; }
+.ctbl .cprog { width: 100%; min-width: 96px; max-width: 194px; }
+.ctbl .cst > div { min-width: 0; }
+@media (max-width: 900px) {
+  .ctbl th, .ctbl td { padding-left: 6px; padding-right: 6px; }
+  .ctbl td:nth-child(2) { white-space: normal; }
+}
+@media (max-width: 760px) {
+  .ctbl td:nth-child(1) { min-width: 96px; }
+  .ctbl td:nth-child(3) { min-width: 64px; }
+  .ctbl td:nth-child(4), .ctbl td:nth-child(6), .ctbl th:nth-child(6) { white-space: normal; }
+  .ctbl .cname .ms { display: none; }
+  .ctbl .cprog { min-width: 64px; }
+}
