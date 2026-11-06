@@ -1132,3 +1132,6 @@ button.step:hover span:last-child { text-decoration: underline; }
 .names li.empty { display: block; }
 .side .clr { margin-top: auto; display: flex; justify-content: flex-end; padding: 12px 8px 12px; }
 .side .clr + .foot { margin-top: 0; }
+
+/* Start page: buttons, paused-session card and status box never grow wider than 600px */
+.hside > .btn, .hside .two, .hside .syncard, .hside .pcard { max-width: 600px; width: 100%; }
