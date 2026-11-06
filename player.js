@@ -100,7 +100,7 @@
     { id: 'SES-1102-02', name: 'Evening Shift Safety', date: 'Nov 2, 2026, 4:00 PM', fac: 'Jordan Lee', emps: 8, acts: '1 of 3', dur: '14 min', status: 'Ended early', upload: 'Uploaded' },
     { id: 'SES-1030-01', name: 'Lockout / Tagout Review', date: 'Oct 30, 2026, 9:00 AM', fac: 'Alex Morgan', emps: 10, acts: '1', dur: '13 min', status: 'Completed', upload: 'Uploaded' },
   ];
-  // Course catalogue for the Download courses dialog. st: ready | update | downloading | done | failed
+  // Course catalogue for the Course Updates dialog. st: ready | update | downloading | done | failed
   const COURSES = [
     { id: 'c1', t: 'Food Safety Basics', video: false, lang: 'English (US)', cat: 'Food safety', up: 'Oct 30, 2026', mb: 28.5, st: 'ready' },
     { id: 'c2', t: 'Personal Protective Equipment', video: true, lang: 'English (US)', cat: 'Workplace safety', up: 'Oct 28, 2026', mb: 42.1, st: 'update' },
@@ -241,7 +241,7 @@
     { id: 'n4', pri: 'low', icon: 'cloud_upload', title: 'Results waiting to upload', body: 'Morning Shift Safety results upload automatically when Alchemy Manager is connected.', day: 0, at: 390, time: 'Today, 6:30 AM', act: 'View recent sessions', run: 'go:sessions', unread: true },
     { id: 'n5', pri: 'low', icon: 'task_alt', title: 'Results uploaded', body: 'Evening Shift Safety results for 12 employees uploaded to Alchemy Manager.', day: 1, at: 1068, time: 'Yesterday, 5:48 PM', act: 'View recent sessions', run: 'go:sessions', unread: false },
     { id: 'n7', pri: 'low', icon: 'system_update', title: 'Player update available', body: 'Alchemy Player 8.4.0 is ready. It installs the next time you close the Player.', day: 1, at: 1020, time: 'Yesterday, 5:00 PM', act: 'See what’s new', run: 'toast:Release notes open in the Help Center in the real Player.', unread: false },
-    { id: 'n6', pri: 'low', icon: 'cloud_download', title: 'New course available', body: 'Hazard Communication (GHS) is ready to download.', day: 1, at: 850, time: 'Yesterday, 2:10 PM', act: 'Download course', run: 'open-courses', unread: false },
+    { id: 'n6', pri: 'low', icon: 'cloud_download', title: 'New course available', body: 'Hazard Communication (GHS) is ready to download.', day: 1, at: 850, time: 'Yesterday, 2:10 PM', act: 'Open Course Updates', run: 'open-courses', unread: false },
   ];
   const notif = { open: false, tab: 'all', list: NOTIFS.map(n => ({ ...n })) };
   const unreadCount = () => notif.list.filter(n => n.unread).length;
@@ -976,7 +976,7 @@
       <div class="mb">${ADMIN.map(([h, tiles]) => `<div class="sec"><h3>${h}</h3><div class="tiles">${tiles.map(([ic, l, a]) => `<button class="tile" type="button" ${a ? `data-action="${a}"` : `data-action="toast" data-msg="${l} isn't part of this prototype yet."`}>${icon(ic, 'fill')}<span>${l}</span></button>`).join('')}</div></div>`).join('')}</div></div>`;
   }
 
-  // Download courses (More → Download course)
+  // Course Updates (More → Course Updates)
   function filteredCourses(m) {
     const q = m.q.trim().toLowerCase();
     return state.courses.filter(c => (!q || c.t.toLowerCase().includes(q)) && (m.lang === 'all' || c.lang === m.lang) && (m.cat === 'all' || c.cat === m.cat));
@@ -996,7 +996,7 @@
       : c.st === 'downloading' ? `<button class="iconbtn" type="button" aria-label="Cancel downloading ${esc(c.t)}" data-action="crs-cancel" data-id="${c.id}">${icon('cancel')}</button>`
       : c.st === 'failed' ? `<button class="retry" type="button" data-action="crs-dl" data-id="${c.id}">Retry</button>` : '';
     return `<div class="modal crs" role="dialog" aria-modal="true" aria-labelledby="mt" style="max-width:1280px">
-      ${mHead('cloud_download', 'Download courses')}
+      ${mHead('cloud_download', 'Course Updates')}
       <div class="mb"><div class="muted desc">Download available course updates to this Player.</div>
         <div class="cfil">
           <label class="field">${icon('search')}<span class="sr">Search courses</span><input id="crsQ" type="search" placeholder="Search courses" value="${esc(m.q)}" data-input="crsQ"></label>
