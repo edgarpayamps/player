@@ -1135,3 +1135,7 @@ button.step:hover span:last-child { text-decoration: underline; }
 
 /* Start page: buttons, paused-session card and status box never grow wider than 600px */
 .hside > .btn, .hside .two, .hside .syncard, .hside .pcard { max-width: 600px; width: 100%; }
+/* ...and that 600px column sits centred in the side panel (title and intro align with it) */
+.hside { padding-left: max(60px, calc((100% - 600px) / 2)); padding-right: max(60px, calc((100% - 600px) / 2)); }
+.hside.paused { padding-left: max(43px, calc((100% - 600px) / 2)); padding-right: max(43px, calc((100% - 600px) / 2)); }
+@media (max-width: 1100px) { .hside, .hside.paused { padding-left: max(24px, calc((100% - 600px) / 2)); padding-right: max(24px, calc((100% - 600px) / 2)); } }

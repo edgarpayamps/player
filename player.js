@@ -997,7 +997,7 @@
       : c.st === 'failed' ? `<button class="retry" type="button" data-action="crs-dl" data-id="${c.id}">Retry</button>` : '';
     return `<div class="modal crs" role="dialog" aria-modal="true" aria-labelledby="mt" style="max-width:1280px">
       ${mHead('cloud_download', 'Download courses')}
-      <div class="mb"><div class="muted desc">Download available courses and updates to this Player.</div>
+      <div class="mb"><div class="muted desc">Download available course updates to this Player.</div>
         <div class="cfil">
           <label class="field">${icon('search')}<span class="sr">Search courses</span><input id="crsQ" type="search" placeholder="Search courses" value="${esc(m.q)}" data-input="crsQ"></label>
           <select class="select" aria-label="Language" data-change-modal="lang"><option value="all">Language</option>${uniq('lang').map(o => `<option${m.lang === o ? ' selected' : ''}>${o}</option>`).join('')}</select>
