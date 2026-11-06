@@ -883,7 +883,7 @@
       : c.st === 'downloading' ? `<button class="iconbtn" type="button" aria-label="Cancel downloading ${esc(c.t)}" data-action="crs-cancel" data-id="${c.id}">${icon('cancel')}</button>`
       : c.st === 'failed' ? `<button class="retry" type="button" data-action="crs-dl" data-id="${c.id}">Retry</button>` : '';
     return `<div class="modal crs" role="dialog" aria-modal="true" aria-labelledby="mt" style="max-width:1280px">
-      <div class="eyebrow-m">Admin settings</div>${mHead('cloud_download', 'Download courses')}
+      ${mHead('cloud_download', 'Download courses')}
       <div class="mb"><div class="muted desc">Download available courses and updates to this Player.</div>
         <div class="cfil">
           <label class="field">${icon('search')}<span class="sr">Search courses</span><input id="crsQ" type="search" placeholder="Search courses" value="${esc(m.q)}" data-input="crsQ"></label>
