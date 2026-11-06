@@ -475,6 +475,7 @@
               ${icon('drag_indicator', 'grip')}<span class="n">${i + 1}</span><span class="tt">${esc(a.title)}</span><span class="dur">${a.dur} min</span>
               <button type="button" class="iconbtn" aria-label="Remove ${esc(a.title)}" data-action="remove-act" data-id="${a.id}">${icon('close')}</button>
             </li>`).join('')}</ol>` : `<div class="empty">No activities yet. Select activities from the library to add them here.${state.lastSel && state.lastSel.length ? `<div style="margin-top:14px"><button class="link sm" type="button" data-action="restore-sel">${icon('restore')}Restore selection</button></div>` : ''}</div>`}
+          ${sel.length ? `<div class="clr"><button class="link sm" type="button" data-action="clear-acts">${icon('close')}Clear activities</button></div>` : ''}
           <div class="foot">
             <div>${state.playlistName
               ? `<button class="link plname" type="button" data-action="save-playlist" aria-label="Rename playlist ${esc(state.playlistName)}">${icon('format_list_numbered')}${esc(state.playlistName)}</button>`
@@ -1285,6 +1286,7 @@
       case 'confirm-end': openModal({ type: 'endSes' }); break;
       case 'clear-roster': state.lastRoster = { sel: state.selEmps.slice(), remotes: { ...state.remotes } }; state.selEmps = []; state.remotes = {}; render(); break;
       case 'restore-roster': if (state.lastRoster) { state.selEmps = state.lastRoster.sel; state.remotes = state.lastRoster.remotes; state.lastRoster = null; } render(); break;
+      case 'clear-acts': state.lastSel = state.selActs.slice(); snap = null; state.selActs = []; render(); break;
       case 'restore-sel': state.selActs = state.lastSel || []; state.lastSel = null; render(); break;
       case 'open-details': openModal({ type: 'details', id }); break;
       case 'detail-toggle': setActs(state.selActs.includes(id) ? state.selActs.filter(x => x !== id) : [...state.selActs, id]); closeModal(); render(); toast(state.selActs.includes(id) ? `Added “${act(id).title}” to the session.` : `Removed “${act(id).title}” from the session.`); break;
