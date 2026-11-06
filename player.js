@@ -20,7 +20,78 @@
     { id: 'food', title: 'Food Safety Basics', desc: 'Practice safe food handling and prevent contamination.', cat: 'Food Safety', dur: 15, questions: 6, dl: 100,
       long: 'Learn safe food handling practices to help prevent contamination. This activity introduces personal hygiene, cross-contamination prevention, and safe food storage practices.',
       comp: ['Identify common sources of food contamination.', 'Recognize proper personal hygiene practices.', 'Describe ways to prevent cross-contamination.', 'Identify safe food storage practices.'] },
+    // Added library entries: varied category, length, languages and download state to demo filtering.
+    { id: 'slip', title: 'Slips, Trips and Falls', desc: 'Spot walking hazards and keep floors and aisles clear.', cat: 'Workplace Safety', dur: 8, questions: 4, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'fire', title: 'Fire Safety and Extinguishers', desc: 'Respond to fires and use an extinguisher with PASS.', cat: 'Workplace Safety', dur: 12, questions: 5, dl: 100, langs: ['English', 'Spanish', 'French'] },
+    { id: 'evac', title: 'Emergency Evacuation', desc: 'Know exits, assembly points and headcount steps.', cat: 'Workplace Safety', dur: 9, questions: 4, dl: 100, langs: ['English', 'Spanish', 'French'] },
+    { id: 'ergo', title: 'Ergonomics and Safe Lifting', desc: 'Lift, carry and reach without strain injuries.', cat: 'Workplace Safety', dur: 11, questions: 5, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'mg', title: 'Machine Guarding', desc: 'Keep guards in place and recognize pinch points.', cat: 'Workplace Safety', dur: 14, questions: 6, dl: 80, langs: ['English'] },
+    { id: 'hazcom', title: 'Hazard Communication (GHS)', desc: 'Read labels and safety data sheets for chemicals.', cat: 'Workplace Safety', dur: 16, questions: 6, dl: 100, langs: ['English', 'Spanish', 'French'] },
+    { id: 'conf', title: 'Confined Space Awareness', desc: 'Recognize permit spaces and entry hazards.', cat: 'Workplace Safety', dur: 13, questions: 5, dl: 40, langs: ['English'] },
+    { id: 'fall', title: 'Working at Heights', desc: 'Use ladders, platforms and fall protection safely.', cat: 'Workplace Safety', dur: 12, questions: 5, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'elec', title: 'Electrical Safety Basics', desc: 'Avoid shock and arc hazards around equipment.', cat: 'Workplace Safety', dur: 10, questions: 4, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'fork', title: 'Forklift Pedestrian Safety', desc: 'Stay safe when working near powered trucks.', cat: 'Workplace Safety', dur: 7, questions: 3, dl: 100, langs: ['English', 'Spanish', 'French'] },
+    { id: 'heat', title: 'Heat Stress Prevention', desc: 'Recognize heat illness and take recovery breaks.', cat: 'Workplace Safety', dur: 6, questions: 3, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'cold', title: 'Cold Storage Safety', desc: 'Work safely in freezers and refrigerated rooms.', cat: 'Workplace Safety', dur: 8, questions: 4, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'hand', title: 'Handwashing and Hygiene', desc: 'Wash hands correctly and at the right times.', cat: 'Food Safety', dur: 6, questions: 3, dl: 100, langs: ['English', 'Spanish', 'French'] },
+    { id: 'allerg', title: 'Allergen Awareness', desc: 'Control major allergens from receiving to packing.', cat: 'Food Safety', dur: 12, questions: 5, dl: 100, langs: ['English', 'Spanish', 'French'] },
+    { id: 'gmp', title: 'Good Manufacturing Practices', desc: 'Follow GMP rules for dress, conduct and hygiene.', cat: 'Food Safety', dur: 15, questions: 6, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'haccp', title: 'HACCP Fundamentals', desc: 'Understand hazards, critical control points and limits.', cat: 'Food Safety', dur: 20, questions: 8, dl: 60, langs: ['English'] },
+    { id: 'fm', title: 'Foreign Material Control', desc: 'Prevent glass, metal and plastic contamination.', cat: 'Food Safety', dur: 10, questions: 4, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'temp', title: 'Temperature Control', desc: 'Keep products in safe temperature zones.', cat: 'Food Safety', dur: 9, questions: 4, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'xcon', title: 'Cross-Contamination Prevention', desc: 'Separate raw and ready-to-eat products.', cat: 'Food Safety', dur: 11, questions: 5, dl: 100, langs: ['English', 'Spanish', 'French'] },
+    { id: 'defense', title: 'Food Defense Awareness', desc: 'Spot and report tampering and unusual activity.', cat: 'Food Safety', dur: 8, questions: 4, dl: 100, langs: ['English'] },
+    { id: 'label', title: 'Label Verification', desc: 'Check codes, dates and allergen statements.', cat: 'Food Safety', dur: 7, questions: 3, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'pest', title: 'Pest Control Awareness', desc: 'Recognize pest activity and report it fast.', cat: 'Food Safety', dur: 6, questions: 3, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'ssop', title: 'Sanitation SOPs', desc: 'Follow standard cleaning steps for food surfaces.', cat: 'Sanitation', dur: 14, questions: 6, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'chemhand', title: 'Sanitation Chemical Handling', desc: 'Mix, label and store cleaning chemicals safely.', cat: 'Sanitation', dur: 12, questions: 5, dl: 100, langs: ['English', 'Spanish', 'French'] },
+    { id: 'cip', title: 'Clean-in-Place Basics', desc: 'Understand CIP cycles and verification checks.', cat: 'Sanitation', dur: 18, questions: 7, dl: 20, langs: ['English'] },
+    { id: 'atp', title: 'ATP Swab Testing', desc: 'Swab surfaces and read ATP results correctly.', cat: 'Sanitation', dur: 8, questions: 4, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'zone', title: 'Hygienic Zoning', desc: 'Respect zone colors, traffic and tool rules.', cat: 'Sanitation', dur: 9, questions: 4, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'drain', title: 'Drain Cleaning and Listeria Control', desc: 'Clean drains without spreading contamination.', cat: 'Sanitation', dur: 11, questions: 5, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'qa1', title: 'Quality Checks on the Line', desc: 'Run in-process checks and record results.', cat: 'Quality Assurance', dur: 10, questions: 4, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'hold', title: 'Product Hold and Release', desc: 'Tag, segregate and release held product.', cat: 'Quality Assurance', dur: 9, questions: 4, dl: 100, langs: ['English'] },
+    { id: 'docs', title: 'Good Documentation Practices', desc: 'Record data accurately and correct errors properly.', cat: 'Quality Assurance', dur: 12, questions: 5, dl: 100, langs: ['English', 'Spanish', 'French'] },
+    { id: 'calib', title: 'Scale and Thermometer Calibration', desc: 'Verify measuring devices before each shift.', cat: 'Quality Assurance', dur: 10, questions: 4, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'cust', title: 'Handling Customer Complaints', desc: 'Log complaints and support investigations.', cat: 'Quality Assurance', dur: 8, questions: 3, dl: 100, langs: ['English'] },
+    { id: 'trace', title: 'Traceability and Recalls', desc: 'Trace lots and support mock recalls.', cat: 'Quality Assurance', dur: 15, questions: 6, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'mixer', title: 'Mixer Operation', desc: 'Start, run and stop industrial mixers safely.', cat: 'Equipment Operation', dur: 16, questions: 6, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'slicer', title: 'Slicer Operation and Cleaning', desc: 'Operate and clean slicers without injury.', cat: 'Equipment Operation', dur: 14, questions: 6, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'pallet', title: 'Pallet Jack Operation', desc: 'Move loads with manual and electric pallet jacks.', cat: 'Equipment Operation', dur: 9, questions: 4, dl: 100, langs: ['English', 'Spanish', 'French'] },
+    { id: 'wrap', title: 'Stretch Wrapper Operation', desc: 'Wrap pallets safely and change film rolls.', cat: 'Equipment Operation', dur: 8, questions: 3, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'metal', title: 'Metal Detector Checks', desc: 'Test detectors and handle rejected product.', cat: 'Equipment Operation', dur: 10, questions: 4, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'boiler', title: 'Boiler Room Awareness', desc: 'Recognize steam and pressure hazards.', cat: 'Equipment Operation', dur: 12, questions: 5, dl: 0, langs: ['English'] },
+    { id: 'compress', title: 'Compressed Air Safety', desc: 'Use compressed air without injury.', cat: 'Equipment Operation', dur: 6, questions: 3, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'spill', title: 'Spill Response', desc: 'Contain and clean small chemical spills.', cat: 'Environmental', dur: 8, questions: 4, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'waste', title: 'Waste Segregation and Recycling', desc: 'Sort waste streams the right way.', cat: 'Environmental', dur: 7, questions: 3, dl: 100, langs: ['English', 'Spanish', 'French'] },
+    { id: 'water', title: 'Water Conservation', desc: 'Reduce water use during cleaning and production.', cat: 'Environmental', dur: 6, questions: 3, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'stor', title: 'Stormwater Protection', desc: 'Keep pollutants out of storm drains.', cat: 'Environmental', dur: 7, questions: 3, dl: 100, langs: ['English'] },
+    { id: 'energy', title: 'Energy Saving on the Floor', desc: 'Cut energy waste on lines and in storage.', cat: 'Environmental', dur: 6, questions: 3, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'harass', title: 'Harassment Prevention', desc: 'Recognize, prevent and report harassment.', cat: 'HR and Compliance', dur: 20, questions: 8, dl: 100, langs: ['English', 'Spanish', 'French'] },
+    { id: 'ethics', title: 'Code of Conduct', desc: 'Apply company values to everyday decisions.', cat: 'HR and Compliance', dur: 15, questions: 6, dl: 100, langs: ['English', 'Spanish', 'French'] },
+    { id: 'privacy', title: 'Data Privacy Basics', desc: 'Protect employee and customer information.', cat: 'HR and Compliance', dur: 10, questions: 4, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'div', title: 'Respect in the Workplace', desc: 'Build an inclusive and respectful team.', cat: 'HR and Compliance', dur: 12, questions: 5, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'wpv', title: 'Workplace Violence Prevention', desc: 'Spot warning signs and respond safely.', cat: 'HR and Compliance', dur: 11, questions: 5, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'onb', title: 'New Hire Orientation', desc: 'Learn the essentials for your first week.', cat: 'HR and Compliance', dur: 25, questions: 8, dl: 100, langs: ['English', 'Spanish', 'French'] },
+    { id: 'lead1', title: 'Leading Safety Huddles', desc: 'Run short, useful pre-shift safety talks.', cat: 'Leadership', dur: 10, questions: 4, dl: 100, langs: ['English'] },
+    { id: 'coach', title: 'Coaching on the Floor', desc: 'Give quick, specific feedback that sticks.', cat: 'Leadership', dur: 14, questions: 5, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'incid', title: 'Incident Investigation', desc: 'Find root causes and prevent repeats.', cat: 'Leadership', dur: 18, questions: 7, dl: 100, langs: ['English'] },
+    { id: 'shift', title: 'Shift Handover', desc: 'Pass on status, issues and hazards clearly.', cat: 'Leadership', dur: 8, questions: 3, dl: 100, langs: ['English', 'Spanish'] },
+    { id: 'kaizen', title: 'Continuous Improvement Basics', desc: 'Spot waste and suggest small improvements.', cat: 'Leadership', dur: 12, questions: 5, dl: 100, langs: ['English', 'Spanish'] },
   ];
+  const COMP_BY_CAT = {
+    'Workplace Safety': ['Identify the hazards covered in this activity.', 'Apply the safe work steps on the job.', 'Report unsafe conditions to a supervisor.'],
+    'Food Safety': ['Recognize the contamination risks covered here.', 'Apply the required food safety controls.', 'Know when to stop and escalate an issue.'],
+    'Sanitation': ['Follow the cleaning steps in the right order.', 'Use sanitation chemicals and tools safely.', 'Verify that surfaces are clean before release.'],
+    'Quality Assurance': ['Perform the required quality checks.', 'Record results accurately and on time.', 'Escalate out-of-spec results.'],
+    'Equipment Operation': ['Complete pre-use checks on the equipment.', 'Operate the equipment within safe limits.', 'Shut down and lock out the equipment correctly.'],
+    'Environmental': ['Recognize the environmental impacts covered here.', 'Follow site procedures to reduce them.', 'Report releases and concerns promptly.'],
+    'HR and Compliance': ['Understand the policy and why it matters.', 'Recognize situations the policy covers.', 'Know how to raise a concern.'],
+    'Leadership': ['Prepare and lead the practice with your team.', 'Give clear, specific direction.', 'Follow up and document outcomes.'],
+  };
+  ACTIVITIES.forEach(a => { a.langs = a.langs || ['English', 'Spanish']; a.long = a.long || a.desc; a.comp = a.comp || COMP_BY_CAT[a.cat]; });
+  const ACT_CATS = [...new Set(ACTIVITIES.map(a => a.cat))];
+  const ACT_LANGS = ['English', 'Spanish', 'French'];
   const SESSIONS = [
     { id: 'SES-1104-01', name: 'Morning Shift Safety', date: 'Nov 4, 2026, 9:00 AM', fac: 'Edgar Payamps', emps: 7, acts: '3', dur: '36 min', status: 'Completed', upload: 'Pending upload' },
     { id: 'SES-1103-02', name: 'New Hire Orientation', date: 'Nov 3, 2026, 1:30 PM', fac: 'Alex Morgan', emps: 12, acts: '4', dur: '51 min', status: 'Completed', upload: 'Uploaded' },
@@ -42,7 +113,7 @@
   ];
   const FILTERS = {
     site: { title: 'Worksites', ph: 'Search worksites', all: 'All worksites', opts: ['Plant 01', 'Plant 02', 'Distribution Center'] },
-    group: { title: 'Groups', ph: 'Search groups', all: 'All groups', opts: ['Morning Shift', 'Evening Shift', 'Production', 'Packaging', 'Maintenance'] },
+    group: { title: 'Groups', ph: 'Search groups', all: 'All groups', opts: ['Morning Shift', 'Evening Shift', 'Night Shift', 'Production', 'Packaging', 'Maintenance', 'Quality', 'Sanitation', 'Warehouse'] },
     dyn: { title: 'Dynamic Groups', ph: 'Search dynamic groups', all: 'All dynamic groups', opts: ['New Hires', 'Training Due This Month', 'Expiring Qualifications', 'Overdue Training'] },
   };
   const ADMIN = [
@@ -62,6 +133,16 @@
     { id: 'e8', name: 'Michael Brown', dept: 'Packaging', eid: '1265', site: 'Plant 01', shift: 'Evening Shift', dyn: 'Expiring Qualifications' },
     { id: 'e9', name: 'Priya Nair', dept: 'Maintenance', eid: '1302', site: 'Plant 02', shift: 'Evening Shift', dyn: '' },
     { id: 'e10', name: 'Tom Okafor', dept: 'Production', eid: '1317', site: 'Distribution Center', shift: 'Morning Shift', dyn: 'New Hires' },
+    { id: 'e11', name: 'Kenji Tanaka', dept: 'Quality', eid: '1334', site: 'Plant 02', shift: 'Morning Shift', dyn: 'Expiring Qualifications' },
+    { id: 'e12', name: 'Fatima Hassan', dept: 'Sanitation', eid: '1349', site: 'Plant 02', shift: 'Night Shift', dyn: 'New Hires' },
+    { id: 'e13', name: 'Lucas Oliveira', dept: 'Warehouse', eid: '1361', site: 'Distribution Center', shift: 'Evening Shift', dyn: 'Overdue Training' },
+    { id: 'e14', name: 'Grace Kim', dept: 'Production', eid: '1378', site: 'Plant 02', shift: 'Evening Shift', dyn: 'Training Due This Month' },
+    { id: 'e15', name: 'Andre Dubois', dept: 'Maintenance', eid: '1392', site: 'Plant 01', shift: 'Night Shift', dyn: '' },
+    { id: 'e16', name: 'Hannah Schmidt', dept: 'Quality', eid: '1405', site: 'Plant 01', shift: 'Morning Shift', dyn: 'Training Due This Month' },
+    { id: 'e17', name: 'Omar Haddad', dept: 'Warehouse', eid: '1419', site: 'Distribution Center', shift: 'Morning Shift', dyn: '' },
+    { id: 'e18', name: 'Rosa Delgado', dept: 'Sanitation', eid: '1433', site: 'Plant 01', shift: 'Night Shift', dyn: 'Overdue Training' },
+    { id: 'e19', name: 'Samuel Adeyemi', dept: 'Packaging', eid: '1447', site: 'Plant 02', shift: 'Evening Shift', dyn: 'New Hires' },
+    { id: 'e20', name: 'Mei Lin', dept: 'Production', eid: '1462', site: 'Distribution Center', shift: 'Night Shift', dyn: 'Expiring Qualifications' },
   ];
   const LANGS = ['English (US)', 'Spanish (MX)', 'French (CA)'];
   const SUBS = ['None', 'English (US)', 'Spanish (MX)'];
@@ -340,7 +421,7 @@
   // ---------- Screen: Select activities ----------
   function filteredActivities() {
     const q = state.actSearch.trim().toLowerCase();
-    return ACTIVITIES.filter(a => (!q || (a.title + ' ' + a.desc).toLowerCase().includes(q)) && (state.actCat === 'all' || a.cat === state.actCat));
+    return ACTIVITIES.filter(a => (!q || (a.title + ' ' + a.desc).toLowerCase().includes(q)) && (state.actCat === 'all' || a.cat === state.actCat) && (state.actLang === 'all' || a.langs.includes(state.actLang)));
   }
   function viewSelect() {
     const list = filteredActivities();
@@ -352,17 +433,17 @@
         <div class="filters">
           <label class="field">${icon('search')}<span class="sr">Search activities</span><input id="actSearch" type="search" placeholder="Search activities" value="${esc(state.actSearch)}" data-input="actSearch"></label>
           <select class="select" id="actCat" aria-label="Category" data-change="actCat">
-            <option value="all"${state.actCat === 'all' ? ' selected' : ''}>Categories (2)</option>
-            <option${state.actCat === 'Workplace Safety' ? ' selected' : ''}>Workplace Safety</option>
-            <option${state.actCat === 'Food Safety' ? ' selected' : ''}>Food Safety</option>
+            <option value="all"${state.actCat === 'all' ? ' selected' : ''}>Categories (${ACT_CATS.length})</option>
+            ${ACT_CATS.map(c => `<option${state.actCat === c ? ' selected' : ''}>${esc(c)}</option>`).join('')}
           </select>
           <select class="select" id="actLang" aria-label="Language" data-change="actLang">
-            <option value="all">Languages (2)</option><option>English</option><option>Spanish</option>
+            <option value="all"${state.actLang === 'all' ? ' selected' : ''}>Languages (${ACT_LANGS.length})</option>
+            ${ACT_LANGS.map(l => `<option${state.actLang === l ? ' selected' : ''}>${l}</option>`).join('')}
           </select>
           <button class="clear" type="button" data-action="clear-act-filters">Clear filters</button>
         </div>
         <label class="selectall"><input type="checkbox" class="check" id="actAll" data-action="toggle-all-acts"${nSel === list.length && list.length ? ' checked' : ''}> Select all results (${nSel} of ${list.length} selected)</label>
-        <div class="scroll-x">
+        <div class="scroll-x act-scroll">
         <table class="tbl act-tbl">
           <thead><tr><th style="width:60px"><span class="sr">Selected</span></th><th>Activity</th><th>Category</th><th>Duration</th><th>Languages</th><th style="width:40px"></th></tr></thead>
           <tbody>${list.map(a => `
@@ -371,7 +452,7 @@
               <td><div class="t">${esc(a.title)}</div><div class="d">${esc(a.desc)}</div></td>
               <td class="c">${esc(a.cat).replace(' ', '<br>')}</td>
               <td class="du">${a.dur} min</td>
-              <td class="l">English<br>Spanish</td>
+              <td class="l">${a.langs.join('<br>')}</td>
               <td><button type="button" class="iconbtn" aria-label="Details for ${esc(a.title)}" data-action="open-details" data-id="${a.id}">${icon('chevron_right')}</button></td>
             </tr>`).join('') || `<tr><td colspan="6" class="empty">No activities match. Clear the filters to see the full library.</td></tr>`}
           </tbody>
@@ -426,6 +507,7 @@
           <div class="tabs" role="tablist">
             <button class="tab" role="tab" type="button" aria-selected="${state.rosterTab === 'employees'}" data-action="rtab" data-tab="employees">${icon('person', 'fill')}Employees</button>
             <button class="tab" role="tab" type="button" aria-selected="${state.rosterTab === 'saved'}" data-action="rtab" data-tab="saved">${icon('how_to_reg')}Saved Roster</button>
+            <span class="grow"></span><button class="btn sm" type="button" data-action="open-scan">${icon('badge', 'fill')}Scan employee badge</button>
 
           </div>
           ${state.rosterTab === 'employees' ? `<div class="inner">
@@ -657,6 +739,7 @@
     if (m.type === 'missing') html = modalMissing(m);
     if (m.type === 'admin') html = modalAdmin(m);
     if (m.type === 'courses') html = modalCourses(m);
+    if (m.type === 'scan') html = modalScan(m);
     if (m.type === 'filter') html = modalFilter(m);
     if (m.type === 'details') html = modalDetails(m);
     if (m.type === 'endSes') html = modalEndSession(m);
@@ -739,8 +822,36 @@
       <div class="mh">${icon('settings_remote', 'lead')}<h2 id="mt">Register employee</h2><button type="button" class="iconbtn" aria-label="Close" data-action="close-modal">${icon('close')}</button></div>
       <div class="mb">${body}</div><div class="mf">${foot}</div></div>`;
   }
+  // Scan employee badge: find the employee and add them to the session roster (no remote step)
+  function modalScan(m) {
+    const e = m.emp ? emp(m.emp) : null;
+    let body, foot;
+    if (!e) {
+      body = `<div>Scan an employee badge to add them to the session roster.</div>
+        <label class="lbl" for="badge">Badge number</label>
+        <label class="field">${icon('badge', 'fill')}<input id="badge" autofocus autocomplete="off" placeholder="Scan or enter badge number" value="${esc(m.badge || '')}" data-input="badge"></label>
+        <div class="muted">For manual entry, press Enter or select Find employee.</div>
+        ${m.err ? `<div style="color:var(--error)" role="alert">${esc(m.err)}</div>` : ''}`;
+      foot = `<button class="btn" type="button" data-action="close-modal">Cancel</button><button class="btn dark" type="button" data-action="find-employee" id="findBtn"${(m.badge || '').trim() ? '' : ' disabled'}>Find employee</button>`;
+    } else {
+      body = `<div class="empcard">${icon('person', 'fill')}<span class="vr"></span><div><b>${esc(e.name)}</b><div>Employee ID: ${e.eid}</div><div class="muted">${esc(e.dept)} · ${esc(e.site)}</div></div></div>
+        <div class="okbox" role="status">${icon('task_alt')}<b>${m.already ? 'Already on the roster' : 'Added to session roster'}</b><span>${esc(e.name)} ${m.already ? 'is already on' : 'is now on'} the session roster (${plural(state.selEmps.length, 'employee')}).</span></div>`;
+      foot = `<button class="btn" type="button" data-action="scan-more">Scan another badge</button><button class="btn primary" type="button" data-action="close-modal" autofocus>Done</button>`;
+    }
+    return `<div class="modal reg" role="dialog" aria-modal="true" aria-labelledby="mt" style="max-width:640px">
+      <div class="mh">${icon('badge', 'fill lead')}<h2 id="mt">Scan employee badge</h2><button type="button" class="iconbtn" aria-label="Close" data-action="close-modal">${icon('close')}</button></div>
+      <div class="mb">${body}</div><div class="mf">${foot}</div></div>`;
+  }
   function findEmployee() {
     const m = state.modal; const badge = (m.badge || '').trim();
+    if (m.type === 'scan') {
+      // Known badge numbers are employee IDs; any other badge adds the next employee not yet on the roster.
+      const e = EMPLOYEES.find(x => x.eid === badge) || EMPLOYEES.find(x => !state.selEmps.includes(x.id));
+      if (!e) { m.err = 'Every employee is already on the session roster.'; renderModal(); return; }
+      m.already = state.selEmps.includes(e.id);
+      if (!m.already) state.selEmps.push(e.id);
+      m.emp = e.id; m.err = ''; renderModal(); render(); return;
+    }
     let e = EMPLOYEES.find(x => x.eid === badge);
     if (!e && badge) e = emp(nextUnregistered()); // any badge works in the prototype
     if (!e) { m.err = 'Enter or scan a badge number.'; renderModal(); return; }
@@ -948,7 +1059,7 @@
         <div class="admeta"><div>${icon('contact_page', 'fill')}<div><small>Category</small>${esc(a.cat)}</div></div><span class="vr" aria-hidden="true"></span><div>${icon('schedule')}<div><small>Duration</small>${a.dur} min</div></div></div>
         <h4>Description</h4><p>${esc(a.long)}</p>
         <h4>Competencies</h4><ul>${a.comp.map(c => `<li>${esc(c)}</li>`).join('')}</ul>
-        <h4>Available languages</h4><div class="chips"><span class="pill">English</span><span class="pill">Spanish</span></div>
+        <h4>Available languages</h4><div class="chips">${a.langs.map(l => `<span class="pill">${l}</span>`).join('')}</div>
         <div class="note2">${icon('info')}Choose playback language in Preview session.</div></div>
       <div class="mf"><button class="btn" type="button" data-action="close-modal">Close</button><button class="btn dark" type="button" data-action="detail-toggle" data-id="${a.id}" autofocus>${icon(on ? 'remove' : 'add')}${on ? 'Remove from session' : 'Add to session'}</button></div></div>`;
   }
@@ -1214,6 +1325,8 @@
         const done = state.selEmps.length && state.selEmps.every(x => state.remotes[x]);
         openModal({ type: 'register', step: done ? 'done' : 1, badge: '' }); break;
       }
+      case 'open-scan': openModal({ type: 'scan', badge: '' }); break;
+      case 'scan-more': Object.assign(state.modal, { badge: '', emp: null, err: '', already: false }); renderModal(); break;
       case 'register-more': Object.assign(state.modal, { step: 1, badge: '', emp: null, err: '' }); renderModal(); break;
       case 'find-employee': findEmployee(); break;
       case 'reg-emp': {
@@ -1286,7 +1399,7 @@
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape' && notif.open && !state.modal) { setNotifs(false, true); return; }
     if (e.key === 'Escape') { if (state.modal && state.modal.type === 'cancelDl') { state.modal = state.modal.prev; renderModal(); return; } if (state.modal) closeModal(); const m = $('#moreMenu'); if (!m.hidden) m.hidden = true; }
-    if (e.key === 'Enter' && e.target.id === 'badge') findEmployee();
+    if (e.key === 'Enter' && e.target.id === 'badge') { e.preventDefault(); findEmployee(); } // preventDefault: the next step autofocuses a button that Enter would otherwise click
     if (e.key === 'Enter' && e.target.id === 'plName' && state.modal.name.trim()) { e.preventDefault(); $('[data-action="confirm-playlist"]').click(); } // preventDefault: focus returns to the opener, which would reactivate on Enter
     if (e.key === 'Tab' && state.modal) { // keep focus inside the dialog
       const f = [...document.querySelectorAll('#modalRoot button:not([disabled]), #modalRoot input, #modalRoot select')];
