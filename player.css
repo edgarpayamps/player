@@ -1119,3 +1119,11 @@ button.step:hover span:last-child { text-decoration: underline; }
   .ctbl .cname .ms { display: none; }
   .ctbl .cprog { min-width: 64px; }
 }
+
+/* Start page hero: crop only a little; when the frame's shape is far from the photo's (~1:1), show the whole photo on white */
+.home .photo { container-type: size; background: #fff; }
+@container (max-aspect-ratio: 17/20) { .home .photo img { object-fit: contain; object-position: center bottom; } }
+@container (min-aspect-ratio: 5/4) { .home .photo img { object-fit: contain; object-position: center; } }
+@media (max-width: 1100px) {
+  .home .photo { min-height: 0; height: clamp(300px, 60vw, 560px); }
+}
