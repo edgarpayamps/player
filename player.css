@@ -1090,3 +1090,7 @@ button.step:hover span:last-child { text-decoration: underline; }
 /* Session panel: name column wraps; order, duration and remove keep their size. */
 .sel .queue li { grid-template-columns: 24px 32px minmax(0, 1fr) auto 32px; gap: 10px; padding: 10px 10px 10px 12px; }
 .sel .queue .tt { overflow-wrap: anywhere; }
+
+/* Brand cloud SVGs inside icon slots: same box as the glyph they replace */
+.ms.ico-svg { display: inline-flex; align-items: center; justify-content: center; width: 1em; height: 1em; line-height: 1; }
+.ms.ico-svg .cloud-svg { display: block; width: 1em; height: 1em; }

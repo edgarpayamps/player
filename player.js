@@ -117,7 +117,15 @@
 
   const $ = (s, el = document) => el.querySelector(s);
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const icon = (name, cls = '') => `<span class="ms ${cls}" aria-hidden="true">${name}</span>`;
+  // Brand cloud icons (Edgar's SVGs, 2026-11-06) replace the Material cloud glyphs everywhere icon() is used.
+  // currentColor + 1em keep each call site's colour and size; the sync arrows are cut out of the cloud (evenodd).
+  const CLOUDS = {
+    cloud_download: ['0 0 28 28', 'M14 4.66675C18.2467 4.66675 21.7817 7.68841 22.575 11.7017C25.6083 11.9234 28 14.4201 28 17.5001C28 19.0472 27.3854 20.5309 26.2915 21.6249C25.1975 22.7188 23.7138 23.3334 22.1667 23.3334H7C3.13401 23.3334 0 20.1994 0 16.3334C0 12.7167 2.73 9.75341 6.24167 9.36841C7.7 6.58008 10.6283 4.66675 14 4.66675ZM14 21.0001L19.8333 15.1667H16.3333V10.5001H11.6667V15.1667H8.16667L14 21.0001Z'],
+    cloud_sync: ['0 0 35 35', 'M17.4325 5.81084C22.7204 5.81084 27.1221 9.57337 28.11 14.5852C31.887 14.8467 34.8651 17.9555 34.8651 21.7907C34.8651 23.7171 34.0998 25.5646 32.7376 26.9268C31.3754 28.289 29.5279 29.0542 27.6015 29.0542H8.71627C3.90241 29.0542 0 25.1518 0 20.338C0 15.8491 3.39934 12.1447 7.77201 11.6798C9.58789 8.19329 13.2342 5.81084 17.4325 5.81084ZM10.8953 14.0768C8.80343 16.7062 9.00681 20.4251 11.3602 22.7785C12.5805 23.9697 14.2511 24.6961 15.9798 24.6961V27.3981L20.091 23.3015L15.9798 19.1903V21.7907C15.021 21.7907 14.0913 21.413 13.4085 20.7302C12.1882 19.5099 11.9994 17.5923 12.9582 16.1541L10.8953 14.0768ZM15.4278 15.1373L13.3214 13.0308L17.4325 8.91965V11.6217C19.1613 11.6217 20.8319 12.348 22.0522 13.5393C24.4056 15.8927 24.6089 19.6116 22.517 22.241L20.4542 20.1636C21.413 18.7254 21.2241 16.8079 20.0038 15.5876C19.3211 14.9048 18.3913 14.5271 17.4325 14.5271V17.1275L15.4278 15.1373Z'],
+    cloud_upload: ['0 0 40 40', 'M32.25 16.7334C31.1167 10.9834 26.0667 6.66675 20 6.66675C15.1833 6.66675 11 9.40008 8.91667 13.4001C3.9 13.9334 0 18.1834 0 23.3334C0 28.8501 4.48333 33.3334 10 33.3334H31.6667C36.2667 33.3334 40 29.6001 40 25.0001C40 20.6001 36.5833 17.0334 32.25 16.7334ZM23.3333 21.6667V28.3334H16.6667V21.6667H11.6667L20 13.3334L28.3333 21.6667H23.3333Z'],
+  };
+  const cloudSvg = name => `<svg class="cloud-svg" viewBox="${CLOUDS[name][0]}" width="1em" height="1em" fill="currentColor" focusable="false"><path fill-rule="evenodd" clip-rule="evenodd" d="${CLOUDS[name][1]}"/></svg>`;
+  const icon = (name, cls = '') => CLOUDS[name] ? `<span class="ms ico-svg ${cls}" aria-hidden="true">${cloudSvg(name)}</span>` : `<span class="ms ${cls}" aria-hidden="true">${name}</span>`;
   const act = id => ACTIVITIES.find(a => a.id === id);
   const emp = id => EMPLOYEES.find(e => e.id === id);
   const selActs = () => state.selActs.map(act);
@@ -1051,8 +1059,9 @@
     const s = state.sync, r = lastRoute;
     const dlBusy = (state.online && autoOn() && s.dl < 100) || !!dlJob, ulBusy = state.online && s.ul < 100 && queuedUploads() > 0;
     const di = $('#navDlIcon'), ui = $('#navUlIcon');
-    di.textContent = dlBusy ? 'cloud_sync' : 'cloud_download'; di.classList.toggle('pulse', dlBusy);
-    ui.textContent = ulBusy ? 'cloud_sync' : 'cloud_upload'; ui.classList.toggle('pulse', ulBusy);
+    const setCloud = (el, name, busy) => { if (el.dataset.cloud !== name) { el.dataset.cloud = name; el.innerHTML = cloudSvg(name); } el.classList.toggle('pulse', busy); };
+    setCloud(di, dlBusy ? 'cloud_sync' : 'cloud_download', dlBusy);
+    setCloud(ui, ulBusy ? 'cloud_sync' : 'cloud_upload', ulBusy);
     const mgr = $('#stMgr'), base = $('#stBase');
     mgr.innerHTML = state.online ? `${icon('check_circle', 'fill ok')}Alchemy Manager connected` : `${icon('do_not_disturb_on', 'warnic')}Alchemy Manager disconnected`;
     mgr.title = state.online ? 'Prototype: select to simulate going offline' : 'Prototype: select to reconnect';
