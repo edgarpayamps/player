@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alchemy Player</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,400,0..1,0&display=block">
+<link rel="stylesheet" href="player.css">
+</head>
+<body>
+<header class="topnav">
+  <a class="logo-link" href="#home" data-action="go-home" aria-label="Alchemy Player home"><img class="logo" src="assets/alchemy-player-logo.svg" alt=""></a>
+  <div class="grow"></div>
+  <button class="navbtn ask" type="button" data-action="toast" data-msg="Ask AI isn't part of this prototype yet."><span class="ms fill">auto_awesome</span><span class="lbl">Ask AI</span></button>
+  <button class="navbtn" type="button" data-action="open-download"><span class="ms fill" id="navDlIcon">cloud_download</span><span class="lbl">Download</span></button>
+  <button class="navbtn" type="button" data-action="open-upload"><span class="ms fill" id="navUlIcon">cloud_upload</span><span class="lbl">Upload</span></button>
+  <button class="navbtn more" type="button" data-action="toggle-menu" aria-haspopup="menu" aria-expanded="false" id="moreBtn"><span class="lbl">More</span><span class="ms">expand_more</span></button>
+  <div class="navsep" aria-hidden="true"></div>
+  <button class="room" type="button" data-action="edit-room" aria-label="Change training location"><span class="ms">edit</span><span id="roomName">Room 57</span></button>
+  <button class="bell" type="button" id="bellBtn" aria-label="Notifications" aria-haspopup="dialog" aria-expanded="false" aria-controls="notifPanel" data-action="toggle-notifs"><span class="ms fill">notifications</span><span class="count" id="bellCount">4</span></button>
+  <button class="acct" type="button" aria-label="Account" data-action="toast" data-msg="Signed in as Edgar Payamps (facilitator)."><span class="ms">person</span></button>
+  <section class="npanel" id="notifPanel" role="dialog" aria-labelledby="nTitle" hidden></section>
+  <div class="menu" id="moreMenu" role="menu" hidden>
+    <button role="menuitem" type="button" data-action="open-courses"><span class="ms">perm_media</span>Client Media</button>
+    <button role="menuitem" type="button" data-action="toast" data-msg="7 remotes and 1 base station connected."><span class="ms">settings_remote</span>Input Devices</button>
+    <button role="menuitem" type="button" data-action="toast" data-msg="Alchemy Manager opens in a new window in the real Player."><span class="ms">open_in_new</span>Alchemy Manager</button>
+    <button role="menuitem" type="button" data-action="toast" data-msg="Help Center opens in a new window in the real Player."><span class="ms">help</span>Help Center</button>
+    <hr>
+    <button role="menuitem" type="button" data-action="open-admin"><span class="ms fill">settings</span>Admin Settings</button>
+  </div>
+</header>
+
+<main class="workspace" id="workspace"></main>
+
+<footer class="statusbar">
+  <button class="st stbtn" type="button" id="stMgr" data-action="toggle-online"><span class="ms fill ok">check_circle</span>Alchemy Manager connected</button>
+  <span class="st" id="stBase"><span class="ms fill ok">check_circle</span>Base Station connected</span>
+  <span class="grow"></span>
+  <span class="st"><span class="ms">desktop_windows</span>Player version 8.3.6 · © 2004–2026 Intertek Alchemy</span>
+</footer>
+
+<div id="modalRoot"></div>
+<script src="player.js"></script>
+</body>
+</html>
