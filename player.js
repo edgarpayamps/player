@@ -223,7 +223,7 @@
   const queuedUploads = () => SESSIONS.filter(s => s.upload !== 'Uploaded').length;
   function syncCard() {
     const s = state.sync;
-    const row = (ic, title, status, sub, extra = '', end = '') => `<div class="srow">${icon(ic, 'fill ic')}<div><div class="t"><b>${title}</b><span class="bar" aria-hidden="true"></span><span>${status}</span>${extra}</div><small>${sub}</small></div>${end}</div>`;
+    const row = (ic, title, status, sub, extra = '', end = '') => `<div class="srow">${icon(ic, 'fill ic')}<div><div class="t"><b>${title}</b><span class="bar" aria-hidden="true"></span><span>${status}</span>${extra}</div><small${/^Last /.test(sub) ? ' class="ts"' : ''}>${sub}</small></div>${end}</div>`;
     if (!state.online) {
       const q = queuedUploads();
       return `<div class="syncard" role="status">

@@ -1003,6 +1003,44 @@ button.step:hover span:last-child { text-decoration: underline; }
 .cbar small, .cfoot small { font-size: var(--fs-sm); }
 .ov-line { font-size: var(--fs-lg); font-weight: 600; margin-top: 6px; }
 
+/* ---------- Text roles (typography spec, 2026-11-06) ----------
+   One token per role so an element keeps the same size in every state. Sizes only: weights, hit areas,
+   icon sizes and spacing are unchanged. Training content (questions, answers, subtitles) is not touched.
+   Floor: no visible UI text below 12px (--role-meta). The phone-width block below still scales titles down. */
+:root {
+  --role-start-title: 46px;     /* "Ready to train?" */
+  --role-page-title: 34px;      /* setup page titles: Select activities, Add employees, Preview session */
+  --role-section-title: 22px;   /* setup section titles: Activity library, Session roster, Facilitator, ... */
+  --role-cta-lg: 22px;          /* large start-page buttons: Create a training session, View recent sessions, Resume session */
+  --role-dialog-title: 20px;    /* Activity details dialog header */
+  --role-dialog-subject: 22px;  /* the activity name inside Activity details: most prominent text in the dialog */
+  --role-body: 16px;            /* intros, instructions, stepper labels, names, descriptions */
+  --role-support: 14px;         /* table values, headers, filter labels, row descriptions, actionable status */
+  --role-meta: 12px;            /* last-sync timestamps, version and copyright, notification counts */
+}
+/* Start page */
+.hside h1 { font-size: var(--role-start-title); }
+.hside .lead { font-size: var(--role-body); }
+.btn.cta, .btn.cta2, .btn.resume { font-size: var(--role-cta-lg); }
+.srow .t b { font-size: var(--role-body); }                 /* Downloads / Uploads, every sync state */
+.srow .t span, .srow small { font-size: var(--role-support); } /* transfer progress, queued uploads */
+.srow small.ts { font-size: var(--role-meta); }              /* Last downloaded / Last uploaded */
+/* Session setup */
+.head h1 { font-size: var(--role-page-title); }
+.head p, .step { font-size: var(--role-body); }
+.library h2, .side h2, .rpanel h2, .acts .hd h2, .mini h3, .facil h3 { font-size: var(--role-section-title); }
+.act-tbl td .t, .emp-tbl td .nm, .queue .tt { font-size: var(--role-body); }         /* activity and employee names stay 16 */
+.act-tbl td.c, .act-tbl td.l, .act-tbl td.du, .emp-tbl td.v { font-size: var(--role-support); } /* category, language, duration, ID, worksite */
+.act-tbl th, .emp-tbl th, .tbl th, .act-tbl td .d, .emp-tbl td .dp, .ff > span { font-size: var(--role-support); }
+/* Activity details dialog */
+.ad .mh h2 { font-size: var(--role-dialog-title); }
+.ad h3.adt { font-size: var(--role-dialog-subject); }
+.ad .mb > p, .ad .mb li { font-size: var(--role-body); }
+/* Status and metadata */
+.statusbar .st { font-size: var(--role-support); }            /* connection status */
+.statusbar .st.ver { font-size: var(--role-meta); }           /* Player version and copyright */
+.bell .count, .ntabs .nb { font-size: var(--role-meta); }
+
 @media (max-width: 900px) {
   .head h1, .rhead h1, .shead h1, .trhead h1, .hside h1.wb { font-size: var(--fs-xl); }
   .hside h1 { font-size: var(--fs-2xl); }
