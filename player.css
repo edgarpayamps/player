@@ -1099,9 +1099,9 @@ button.step:hover span:last-child { text-decoration: underline; }
 .ctbl { overflow-x: auto; }
 .ctbl .tbl { min-width: 0; table-layout: auto; }
 .ctbl th, .ctbl td { white-space: nowrap; }
-.ctbl td:nth-child(1), .ctbl td:nth-child(3), .ctbl th:nth-child(1), .ctbl th:nth-child(3) { white-space: normal; overflow-wrap: break-word; }
-.ctbl td:nth-child(1) { min-width: 140px; }
-.ctbl td:nth-child(3) { min-width: 80px; }
+.ctbl td:nth-child(2), .ctbl td:nth-child(4), .ctbl th:nth-child(2), .ctbl th:nth-child(4) { white-space: normal; overflow-wrap: break-word; }
+.ctbl td:nth-child(2) { min-width: 140px; }
+.ctbl td:nth-child(4) { min-width: 80px; }
 .ctbl .cname { display: flex; align-items: flex-start; }
 .ctbl .cname .ms { flex: none; margin-top: 1px; }
 .ctbl td.act { width: 1%; }
@@ -1110,12 +1110,12 @@ button.step:hover span:last-child { text-decoration: underline; }
 .ctbl .cst > div { min-width: 0; }
 @media (max-width: 900px) {
   .ctbl th, .ctbl td { padding-left: 6px; padding-right: 6px; }
-  .ctbl td:nth-child(2) { white-space: normal; }
+  .ctbl td:nth-child(3) { white-space: normal; }
 }
 @media (max-width: 760px) {
-  .ctbl td:nth-child(1) { min-width: 96px; }
-  .ctbl td:nth-child(3) { min-width: 64px; }
-  .ctbl td:nth-child(4), .ctbl td:nth-child(6), .ctbl th:nth-child(6) { white-space: normal; }
+  .ctbl td:nth-child(2) { min-width: 96px; }
+  .ctbl td:nth-child(4) { min-width: 64px; }
+  .ctbl td:nth-child(5), .ctbl td:nth-child(7), .ctbl th:nth-child(7) { white-space: normal; }
   .ctbl .cname .ms { display: none; }
   .ctbl .cprog { min-width: 64px; }
 }
@@ -1139,3 +1139,7 @@ button.step:hover span:last-child { text-decoration: underline; }
 .hside { padding-left: max(60px, calc((100% - 600px) / 2)); padding-right: max(60px, calc((100% - 600px) / 2)); }
 .hside.paused { padding-left: max(43px, calc((100% - 600px) / 2)); padding-right: max(43px, calc((100% - 600px) / 2)); }
 @media (max-width: 1100px) { .hside, .hside.paused { padding-left: max(24px, calc((100% - 600px) / 2)); padding-right: max(24px, calc((100% - 600px) / 2)); } }
+
+/* Course Updates: selection column */
+.ctbl th.sel, .ctbl td.sel { width: 1%; padding-right: 0; }
+.ctbl .check:disabled { opacity: .35; cursor: default; }

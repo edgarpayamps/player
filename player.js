@@ -762,7 +762,7 @@
     if (!first && activeId) f = root.querySelector(`[data-action="${activeId}"], #${CSS.escape(activeId)}`);
     if (!f && (first || !root.contains(document.activeElement))) f = root.querySelector('[autofocus]') || root.querySelector('.modal button, .modal input');
     if (f) { f.focus(); if (f.matches('input[type=search], input:not([type])') && f.value) { const n = f.value.length; try { f.setSelectionRange(n, n); } catch (e) {} } }
-    root.querySelectorAll('.check[data-ind]').forEach(c => { c.indeterminate = true; });
+    root.querySelectorAll('.check').forEach(c => { c.indeterminate = c.hasAttribute('data-ind'); });
   }
   // Minimal DOM patch: keep nodes that match by tag, update text and attributes, replace the rest.
   function morph(from, to) {
@@ -987,6 +987,10 @@
     const busy = state.courses.filter(c => c.st === 'downloading').length;
     const mb = avail.reduce((t, c) => t + c.mb, 0).toFixed(1);
     const uniq = k => [...new Set(state.courses.map(c => c[k]))];
+    const canSel = c => c.st === 'ready' || c.st === 'update' || c.st === 'failed';
+    m.sel = (m.sel || []).filter(id => canSel(state.courses.find(c => c.id === id)));
+    const visSel = list.filter(canSel), nVisOn = visSel.filter(c => m.sel.includes(c.id)).length;
+    const selMb = state.courses.filter(c => m.sel.includes(c.id)).reduce((t, c) => t + c.mb, 0).toFixed(1);
     const status = c => c.st === 'ready' ? 'Ready to download'
       : c.st === 'update' ? '<span class="ctag">Update available</span>'
       : c.st === 'downloading' ? `<div>Downloading ${Math.round(c.p)}%</div><div class="cprog"><div style="width:${c.p}%"></div></div>`
@@ -1005,11 +1009,14 @@
           <select class="select" aria-label="Worksite"><option>Worksite</option><option>Plant 01</option><option>Plant 02</option><option>Distribution Center</option></select>
         </div>
         <div class="cbar"><b>${plural(list.length, 'course')}</b><small>Last checked: ${m.checked}</small><button class="btn sm" type="button" data-action="crs-check"${m.checking ? ' disabled' : ''}>${m.checking ? '<span class="spin sm"></span>Checking…' : `${icon('sync')}Check for updates`}</button></div>
-        <div class="ctbl"><table class="tbl"><thead><tr><th>Course</th><th>Language</th><th>Category</th><th>Updated</th><th>Size</th><th>Status</th><th><span class="sr">Action</span></th></tr></thead>
-          <tbody>${list.map(c => `<tr><td><span class="cname">${icon(c.video ? 'videocam' : 'description', 'fill')}${esc(c.t)}</span></td><td>${c.lang}</td><td>${c.cat}</td><td>${c.up}</td><td>${c.mb.toFixed(1)} MB</td><td>${status(c)}</td><td class="act">${action(c)}</td></tr>`).join('') || '<tr><td colspan="7" class="empty">No courses match these filters.</td></tr>'}</tbody></table></div>
+        <div class="ctbl"><table class="tbl"><thead><tr><th class="sel"><input type="checkbox" class="check" id="crsAll" aria-label="Select all courses that can be downloaded" data-action="crs-selall"${visSel.length && nVisOn === visSel.length ? ' checked' : ''}${visSel.length ? '' : ' disabled'}${nVisOn && nVisOn < visSel.length ? ' data-ind="1"' : ''}></th><th>Course</th><th>Language</th><th>Category</th><th>Updated</th><th>Size</th><th>Status</th><th><span class="sr">Action</span></th></tr></thead>
+          <tbody>${list.map(c => `<tr><td class="sel"><input type="checkbox" class="check" aria-label="Select ${esc(c.t)}" data-action="crs-sel" data-id="${c.id}"${m.sel.includes(c.id) ? ' checked' : ''}${canSel(c) ? '' : ' disabled'}></td><td><span class="cname">${icon(c.video ? 'videocam' : 'description', 'fill')}${esc(c.t)}</span></td><td>${c.lang}</td><td>${c.cat}</td><td>${c.up}</td><td>${c.mb.toFixed(1)} MB</td><td>${status(c)}</td><td class="act">${action(c)}</td></tr>`).join('') || '<tr><td colspan="8" class="empty">No courses match these filters.</td></tr>'}</tbody></table></div>
         <div class="infobox" style="margin:0">${icon('info')}${busy ? `${plural(busy, 'download')} in progress. Downloaded courses will be available on this Player.` : 'Downloaded courses are available on this Player.'}</div></div>
-      <div class="mf"><div class="cfoot"><b>${plural(avail.length, 'course')} available · ${mb} MB</b><small>Failed downloads can be retried individually.</small></div>
-        <div class="row"><button class="btn" type="button" data-action="close-modal">Close</button><button class="btn dark" type="button" data-action="crs-all"${avail.length ? '' : ' disabled'}>${icon('download')}Download all (${avail.length})</button></div></div></div>`;
+      <div class="mf">${m.sel.length
+        ? `<div class="cfoot"><b>${plural(m.sel.length, 'course')} selected · ${selMb} MB</b><small><button class="link sm" type="button" data-action="crs-selnone">Clear selection</button></small></div>
+        <div class="row"><button class="btn" type="button" data-action="close-modal">Close</button><button class="btn dark" type="button" data-action="crs-dlsel">${icon('download')}Download selected (${m.sel.length})</button></div></div></div>`
+        : `<div class="cfoot"><b>${plural(avail.length, 'course')} available · ${mb} MB</b><small>Select courses to download only those, or download all.</small></div>
+        <div class="row"><button class="btn" type="button" data-action="close-modal">Close</button><button class="btn dark" type="button" data-action="crs-all"${avail.length ? '' : ' disabled'}>${icon('download')}Download all (${avail.length})</button></div></div></div>`}`;
   }
   function crsDownload(c) {
     if (!state.online) { toast('You’re offline. Courses download when this Player is back online.'); return; }
@@ -1309,6 +1316,10 @@
       case 'open-courses': openModal({ type: 'courses', q: '', lang: 'all', cat: 'all', checked: 'Today, 9:41 AM' }); runCourses(); break;
       case 'crs-dl': crsDownload(state.courses.find(c => c.id === id)); renderModal(); break;
       case 'crs-cancel': { const c = state.courses.find(x => x.id === id); c.st = c.p ? 'ready' : 'ready'; c.p = 0; renderModal(); toast(`Stopped downloading “${c.t}”.`); break; }
+      case 'crs-sel': { const m = state.modal; m.sel = m.sel || []; const i = m.sel.indexOf(id); if (i >= 0) m.sel.splice(i, 1); else m.sel.push(id); renderModal(); break; }
+      case 'crs-selall': { const m = state.modal; const vis = filteredCourses(m).filter(c => ['ready', 'update', 'failed'].includes(c.st)).map(c => c.id); m.sel = m.sel || []; const all = vis.every(x => m.sel.includes(x)); m.sel = all ? m.sel.filter(x => !vis.includes(x)) : [...new Set([...m.sel, ...vis])]; renderModal(); break; }
+      case 'crs-selnone': state.modal.sel = []; renderModal(); break;
+      case 'crs-dlsel': { const m = state.modal; const n = m.sel.length; state.courses.filter(c => m.sel.includes(c.id)).forEach(crsDownload); m.sel = []; renderModal(); if (state.online) toast(`Downloading ${plural(n, 'course')}.`); break; }
       case 'crs-all': state.courses.filter(c => c.st === 'ready' || c.st === 'update').forEach(crsDownload); renderModal(); break;
       case 'crs-check': { const m = state.modal; m.checking = true; renderModal(); mLater(() => { if (state.modal !== m) return; m.checking = false; m.checked = `Today, ${nowTime()}`; renderModal(); toast('No new course updates found.'); }, 1200); break; }
       case 'open-missing': openModal({ type: 'missing', ids: missingActs().map(a => a.id) }); break;
