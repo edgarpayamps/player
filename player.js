@@ -362,7 +362,8 @@
     }
     return `<section class="home">
       <div class="photo"><img src="assets/start-training-photo.webp" alt="A facilitator leads a group training session for Fieldbridge Foods employees, who hold response remotes."></div>
-      <div class="hside${paused ? ' paused' : ''}"><div class="clogo"><img src="assets/customer-logo.webp" alt="Fieldbridge Foods. Made with care. Built on safety."></div>${side}${syncCard()}</div>
+      <div class="clogo"><img src="assets/customer-logo.webp" alt="Fieldbridge Foods. Made with care. Built on safety."></div>
+      <div class="hside${paused ? ' paused' : ''}">${side}${syncCard()}</div>
     </section>`;
   }
   // Background sync runs on every screen. Only the start page re-renders; elsewhere the nav icons

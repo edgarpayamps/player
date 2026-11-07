@@ -1144,11 +1144,12 @@ button.step:hover span:last-child { text-decoration: underline; }
 .ctbl th.sel, .ctbl td.sel { width: 1%; padding-right: 0; }
 .ctbl .check:disabled { opacity: .35; cursor: default; }
 
-/* Start page, narrow screens (stacked): hide the hero photo and show the customer logo card centred above the column */
+/* Start page, narrow screens (stacked): hide the hero photo; grey page with the customer logo card above a white content panel */
 .clogo { display: none; }
 @media (max-width: 1100px) {
+  .home { display: flex; flex-direction: column; align-items: center; background: #ededed; padding: 40px 16px; }
   .home .photo { display: none; }
-  .clogo { display: flex; justify-content: center; align-self: center; width: min(100%, 360px); margin: 0 0 48px; padding: 28px 32px; background: #fff; border-radius: var(--radius); box-shadow: 0 2px 12px rgba(0, 31, 61, .12); }
+  .clogo { display: flex; justify-content: center; width: min(100%, 360px); margin: 0 0 40px; padding: 28px 32px; background: #fff; border-radius: var(--radius); box-shadow: 0 2px 12px rgba(0, 31, 61, .12); }
   .clogo img { display: block; width: 100%; max-width: 296px; height: auto; }
-  .hside { padding-top: 40px; }
+  .hside, .hside.paused { flex: 1 0 auto; width: min(100%, 680px); background: #fff; border-radius: var(--radius); padding: 56px 40px 48px; }
 }
