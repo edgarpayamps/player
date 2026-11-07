@@ -1143,3 +1143,12 @@ button.step:hover span:last-child { text-decoration: underline; }
 /* Course Updates: selection column */
 .ctbl th.sel, .ctbl td.sel { width: 1%; padding-right: 0; }
 .ctbl .check:disabled { opacity: .35; cursor: default; }
+
+/* Start page, narrow screens (stacked): hide the hero photo and show the customer logo card centred above the column */
+.clogo { display: none; }
+@media (max-width: 1100px) {
+  .home .photo { display: none; }
+  .clogo { display: flex; justify-content: center; align-self: center; width: min(100%, 360px); margin: 0 0 48px; padding: 28px 32px; background: #fff; border-radius: var(--radius); box-shadow: 0 2px 12px rgba(0, 31, 61, .12); }
+  .clogo img { display: block; width: 100%; max-width: 296px; height: auto; }
+  .hside { padding-top: 40px; }
+}
