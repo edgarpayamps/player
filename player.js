@@ -289,6 +289,15 @@
     if (open) $('#notifPanel [data-action="n-close"]').focus(); else if (focusBell) $('#bellBtn').focus();
   }
 
+  // Footer tech-details flyout: versions plus a support-data download
+  (function techFlyout() {
+    const btn = $('#techBtn'), pop = $('#techPop'); if (!btn) return;
+    const set = (open, refocus) => { pop.hidden = !open; btn.setAttribute('aria-expanded', String(open)); if (open) { const bar = btn.closest('.statusbar').getBoundingClientRect(), r = btn.getBoundingClientRect(); pop.style.right = 'auto'; pop.style.left = '0px'; const w = pop.offsetWidth; pop.style.left = Math.max(8, Math.min(r.left - 40, bar.width - w - 8)) + 'px'; $('#techDl').focus(); } else if (refocus) btn.focus(); };
+    btn.addEventListener('click', e => { e.stopPropagation(); set(pop.hidden); });
+    $('#techDl').addEventListener('click', () => { set(false, true); toast('Support data downloaded (alchemy-player-support.zip).'); });
+    document.addEventListener('click', e => { if (!pop.hidden && !e.target.closest('#techPop')) set(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && !pop.hidden) set(false, true); });
+  })();
   function toast(msg) {
     document.querySelectorAll('.toast').forEach(t => t.remove());
     const t = document.createElement('div');

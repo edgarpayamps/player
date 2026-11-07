@@ -1156,3 +1156,13 @@ button.step:hover span:last-child { text-decoration: underline; }
   .hside .btn.cta, .hside .btn.cta2 { justify-content: center; gap: 16px; }
   .hside, .hside.paused { flex: 1 0 auto; width: min(100%, 680px); background: #fff; border-radius: var(--radius); padding: 56px 40px 48px; }
 }
+
+/* Footer: tech-details button and flyout */
+.statusbar { position: relative; }
+.techbtn { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; padding: 0; border: 0; background: none; color: #fff; border-radius: var(--radius); cursor: pointer; }
+.techbtn:hover, .techbtn[aria-expanded="true"] { background: rgba(255, 255, 255, .12); }
+.techbtn:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+.techpop { position: absolute; right: max(30px, env(safe-area-inset-right, 0px)); bottom: calc(100% + 8px); z-index: 50; background: #fff; color: var(--navy); border-radius: var(--radius); box-shadow: 0 4px 20px rgba(0, 31, 61, .2); padding: 14px 18px; font-size: 15px; line-height: 1.6; }
+.techpop[hidden] { display: none; }
+.techpop p { margin: 0; }
+.techpop .link { padding: 0; font-size: 15px; font-weight: 400; color: var(--navy); text-decoration: underline; }
