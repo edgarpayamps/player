@@ -1151,5 +1151,8 @@ button.step:hover span:last-child { text-decoration: underline; }
   .home .photo { display: none; }
   .clogo { display: flex; justify-content: center; width: min(100%, 360px); margin: 0 0 40px; padding: 28px 32px; background: #fff; border-radius: var(--radius); box-shadow: 0 2px 12px rgba(0, 31, 61, .12); }
   .clogo img { display: block; width: 100%; max-width: 296px; height: auto; }
+  .hside .eyebrow, .hside h1, .hside .lead { text-align: center; }
+  .hside .lead { margin-left: auto; margin-right: auto; }
+  .hside .btn.cta, .hside .btn.cta2 { justify-content: center; gap: 16px; }
   .hside, .hside.paused { flex: 1 0 auto; width: min(100%, 680px); background: #fff; border-radius: var(--radius); padding: 56px 40px 48px; }
 }
