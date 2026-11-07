@@ -1166,3 +1166,9 @@ button.step:hover span:last-child { text-decoration: underline; }
 .techpop[hidden] { display: none; }
 .techpop p { margin: 0; }
 .techpop .link { padding: 0; font-size: 15px; font-weight: 400; color: var(--navy); text-decoration: underline; }
+
+/* Buttons: Intertek pill profile (2026-11-07). Fields, cards, menus and dialogs keep --radius (6px). */
+:root { --btn-radius: 999px; }
+.btn, .navbtn, .room, .bell, .iconbtn, .techbtn, .rbtn, .nbtn, .retry,
+.hside .btn.cta, .hside .btn.cta2, .btn.resume { border-radius: var(--btn-radius); }
+.btn:not(.cta):not(.cta2):not(.resume) { padding-left: max(20px, 1em); padding-right: max(20px, 1em); }
